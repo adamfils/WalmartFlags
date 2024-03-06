@@ -1,20 +1,14 @@
 package com.techguy.walmartflags.data.repository
 
-import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.techguy.walmartflags.data.model.Country
+import com.techguy.walmartflags.data.source.remote.RetrofitInstance
 import com.techguy.walmartflags.domain.repository.CountryRepository
+import com.techguy.walmartflags.domain.repository.PreferencesRepository
 
-class CountryRepositoryImpl(
-    private val apiService: CountriesApi,
-    private val context: Context
-) : CountryRepository {
-
-    companion object {
-        private const val PREF_NAME = "flagpref"
-        private const val COUNTRY_RESPONSE = "COUNTRY_RESPONSE"
-    }
+class CountryRepositoryImpl(private val preferencesRepository: PreferencesRepository) : CountryRepository {
+    private val apiService = RetrofitInstance.api
 
     override suspend fun getCountries(): List<Country> {
         // Try to get the local version first
@@ -37,17 +31,13 @@ class CountryRepositoryImpl(
     }
 
     override fun saveCountryResponse(value: String) {
-        context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-            .edit()
-            .putString(COUNTRY_RESPONSE, value)
-            .apply()
+        // Save the JSON string to SharedPreferences
+        preferencesRepository.saveCountryData(value)
     }
 
     override fun getCountryResponse(): String? {
-        return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-            .getString(COUNTRY_RESPONSE, null)
+        // Get the saved JSON string from SharedPreferences
+        return preferencesRepository.getCountryData()
     }
 }
-
-
 

@@ -23,7 +23,7 @@ class CountryAdapter : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() 
     override fun getItemCount() = countries.size
 
     class CountryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val binding = CountryItemBinding.bind(itemView)
+        private val binding = CountryItemBinding.bind(itemView)
         fun bind(country: Country) {
             binding.tvCountryName.text = "${country.name}, ${country.region}    ${country.code}"
             binding.tvCountryCapital.text = country.capital

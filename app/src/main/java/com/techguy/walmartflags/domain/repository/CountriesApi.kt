@@ -1,4 +1,4 @@
-package com.techguy.walmartflags.data.repository
+package com.techguy.walmartflags.domain.repository
 
 import com.techguy.walmartflags.data.model.Country
 import retrofit2.Response

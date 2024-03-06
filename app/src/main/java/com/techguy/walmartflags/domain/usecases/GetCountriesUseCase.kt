@@ -1,14 +1,18 @@
 package com.techguy.walmartflags.domain.usecases
 
+import android.content.Context
 import com.google.gson.Gson
 import com.techguy.walmartflags.data.model.Country
+import com.techguy.walmartflags.data.repository.CountryRepositoryImpl
+import com.techguy.walmartflags.data.repository.PreferencesRepositoryImpl
 import com.techguy.walmartflags.domain.model.CountriesResult
-import com.techguy.walmartflags.domain.repository.CountryRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 
-class GetCountriesUseCase(private val repository: CountryRepository) {
+class GetCountriesUseCase(context: Context) {
+    private val preferencesRepository = PreferencesRepositoryImpl(context)
+    private val repository = CountryRepositoryImpl(preferencesRepository)
 
     operator fun invoke(): Flow<CountriesResult<List<Country>>> = flow {
         try {

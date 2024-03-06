@@ -12,14 +12,6 @@ object LocalDB {
         return getSharedPreferences(name, Context.MODE_PRIVATE)
     }
 
-    fun Context.saveString(key: String, value: String, name: String = PREF_NAME) {
-        getSharedPreferences(name).edit().putString(key, value).apply()
-    }
-
-    fun Context.getString(key: String, name: String = PREF_NAME): String? {
-        return getSharedPreferences(name).getString(key, null)
-    }
-
     fun Context.saveCountryResponse(value: String) {
         getSharedPreferences(PREF_NAME).edit().putString(COUNTRY_RESPONSE, value).apply()
     }

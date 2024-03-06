@@ -1,6 +1,6 @@
 package com.techguy.walmartflags.data.source.remote
 
-import com.techguy.walmartflags.data.repository.CountriesApi
+import com.techguy.walmartflags.domain.repository.CountriesApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
